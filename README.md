@@ -41,7 +41,7 @@ async def main():
     img = await deeppyer.deepfry(img, token='optional token')
     img.save('./bar.jpg')
 
-loop = asynio.get_event_loop()
+loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
 
