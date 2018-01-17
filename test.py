@@ -19,20 +19,29 @@ async def main():
     img.save('./tests/gradient.jpg')
 
     print('[tests] Deepfrying gradient...')
-    img = await deeppyer.deepfry(img)
-    img.save('./tests/gradient-fried.jpg')
-    print('[tests] Image successfully deepfried. Saved at `./test/gradient-fried.jpg`.')
 
-    with open('./tests/token.json') as t:
-        data = json.load(t)
+    img2 = await deeppyer.deepfry(img)
+    img2.save('./tests/gradient-fried.jpg')
+
+    img2 = await deeppyer.deepfry(img, type=deeppyer.DeepfryTypes.BLUE)
+    img2.save('./tests/gradient-fried-blue.jpg')
+
+    print('[tests] Image successfully deepfried. Saved at `./test/gradient-fried.jpg`. and `./test/gradient-fried-blue.jpg`')
+
+    #with open('./tests/token.json') as t:
+    #    data = json.load(t)
 
     print('[tests] Deepfrying `./test/test.jpg` with flares.')
 
     img = Image.open('./tests/human-test.jpg')
-    img = await deeppyer.deepfry(img, token=data['token'], url_base=data.get('url_base', 'westcentralus'))
 
-    img.save('./tests/human-fried.jpg')
-    print('[tests] Human image successfully deepfried. Saved at `./test/human-fried`.')
+    img2 = await deeppyer.deepfry(img, token=data['token'], url_base=data.get('url_base', 'westcentralus'))
+    img2.save('./tests/human-fried.jpg')
+
+    img2 = await deeppyer.deepfry(img, token=data['token'], url_base=data.get('url_base', 'westcentralus'), type=deeppyer.DeepfryTypes.BLUE)
+    img2.save('./tests/human-fried-blue.jpg')
+
+    print('[tests] Human image successfully deepfried. Saved at `./test/human-fried.jpg` and `./test/human-fried-blue.jpg`.')
 
     print('[tests] All tests successfully completed.')
 

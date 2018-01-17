@@ -1,8 +1,26 @@
 from PIL import Image, ImageOps, ImageEnhance
 from io import BytesIO
+from enum import Enum
 import aiohttp, asyncio, math, argparse
 
-async def deepfry(img: Image, *, token: str=None, url_base: str='westcentralus', session: aiohttp.ClientSession=None) -> Image:
+class DeepfryTypes(Enum):
+    """
+    Enum for the various possible effects added to the image.
+    """
+    RED = 1
+    BLUE = 2
+
+
+class Colours:
+    RED = (254, 0, 2)
+    YELLOW = (255, 255, 15)
+    BLUE = (36, 113, 229)
+    WHITE = (255,) * 3
+
+
+# TODO: Replace face recognition API with something like OpenCV.
+
+async def deepfry(img: Image, *, token: str=None, url_base: str='westcentralus', session: aiohttp.ClientSession=None, type=DeepfryTypes.RED) -> Image:
     """
     Deepfry an image.
     
@@ -14,6 +32,9 @@ async def deepfry(img: Image, *, token: str=None, url_base: str='westcentralus',
     Returns: PIL.Image - Deepfried image.
     """
     img = img.copy().convert('RGB')
+
+    if type not in DeepfryTypes:
+        raise ValueError(f'Unknown deepfry type "{type}", expected a value from deeppyer.DeepfryTypes')
 
     if token:
         req_url = f'https://{url_base}.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true' # WHY THE FUCK IS THIS SO LONG
@@ -72,7 +93,11 @@ async def deepfry(img: Image, *, token: str=None, url_base: str='westcentralus',
     r = img.split()[0]
     r = ImageEnhance.Contrast(r).enhance(2.0)
     r = ImageEnhance.Brightness(r).enhance(1.5)
-    r = ImageOps.colorize(r, (254, 0, 2), (255, 255, 15))
+
+    if type == DeepfryTypes.RED:
+        r = ImageOps.colorize(r, Colours.RED, Colours.YELLOW)
+    elif type == DeepfryTypes.BLUE:
+        r = ImageOps.colorize(r, Colours.BLUE, Colours.WHITE)
 
     # Overlay red and yellow onto main image and sharpen the hell out of it
     img = Image.blend(img, r, 0.75)
