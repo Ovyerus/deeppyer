@@ -1,6 +1,8 @@
 .vscode
-token.json
 __pycache__
+build
+dist
+*.egg-info
 
 gradient.jpg
 gradient-fried.jpg
