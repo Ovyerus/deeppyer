@@ -1,5 +1,10 @@
+import asyncio
+import math
+
 from PIL import Image
-import asyncio, math, json, deeppyer
+
+import deeppyer
+
 
 async def main():
     print('[tests] Generating gradient image...')
@@ -26,22 +31,21 @@ async def main():
     img2 = await deeppyer.deepfry(img, type=deeppyer.DeepfryTypes.BLUE)
     img2.save('./tests/gradient-fried-blue.jpg')
 
-    print('[tests] Image successfully deepfried. Saved at `./test/gradient-fried.jpg`. and `./test/gradient-fried-blue.jpg`')
-
-    #with open('./tests/token.json') as t:
-    #    data = json.load(t)
+    print('[tests] Image successfully deepfried.'
+          'Saved at `./test/gradient-fried.jpg`. and `./test/gradient-fried-blue.jpg`')
 
     print('[tests] Deepfrying `./test/test.jpg` with flares.')
 
     img = Image.open('./tests/human-test.jpg')
 
-    img2 = await deeppyer.deepfry(img, token=data['token'], url_base=data.get('url_base', 'westcentralus'))
+    img2 = await deeppyer.deepfry(img)
     img2.save('./tests/human-fried.jpg')
 
-    img2 = await deeppyer.deepfry(img, token=data['token'], url_base=data.get('url_base', 'westcentralus'), type=deeppyer.DeepfryTypes.BLUE)
+    img2 = await deeppyer.deepfry(img, type=deeppyer.DeepfryTypes.BLUE)
     img2.save('./tests/human-fried-blue.jpg')
 
-    print('[tests] Human image successfully deepfried. Saved at `./test/human-fried.jpg` and `./test/human-fried-blue.jpg`.')
+    print('[tests] Human image successfully deepfried.'
+          'Saved at `./test/human-fried.jpg` and `./test/human-fried-blue.jpg`.')
 
     print('[tests] All tests successfully completed.')
 
