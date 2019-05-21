@@ -1,5 +1,6 @@
 # deeppyer
-![banner image](./banner.jpg)
+[![PyPI](https://img.shields.io/pypi/v/deeppyer.svg)](https://pypi.org/project/deeppyer/)  
+![banner image](https://raw.githubusercontent.com/Ovyerus/deeppyer/master/banner.jpg)
 
 deeppyer is an image deepfryer written in Python using [Pillow](https://python-pillow.org/)
 and [OpenCV](https://pypi.org/project/opencv-python/).
