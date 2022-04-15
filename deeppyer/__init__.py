@@ -20,8 +20,8 @@ class DefaultColours:
     blue = ((36, 113, 229), (255,) * 3)
 
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 flare_img = Image.open(BytesIO(pkgutil.get_data(__package__, 'flare.png')))
 
 FlarePosition = namedtuple('FlarePosition', ['x', 'y', 'size'])
