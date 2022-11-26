@@ -37,13 +37,13 @@ in which case it is off by default.
 from PIL import Image
 import deeppyer, asyncio
 
-async def main():
+def main():
     img = Image.open('./foo.jpg')
     img = await deeppyer.deepfry(img)
     img.save('./bar.jpg')
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+if __name__ == "__main__":
+    main()
 ```
 
 ## API Documentation
