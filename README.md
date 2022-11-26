@@ -39,7 +39,7 @@ import deeppyer, asyncio
 
 def main():
     img = Image.open('./foo.jpg')
-    img = await deeppyer.deepfry(img)
+    img = deeppyer.deepfry(img)
     img.save('./bar.jpg')
 
 if __name__ == "__main__":
