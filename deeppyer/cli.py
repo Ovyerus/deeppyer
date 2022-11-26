@@ -18,7 +18,6 @@ def main():
     img = Image.open(args.file)
     out = args.output or './deepfried.jpg'
 
-    loop = asyncio.get_event_loop()
-    img = loop.run_until_complete(deepfry(img, flares=args.flares))
+    img = deepfry(img, flares=args.flares)
 
     img.save(out, 'jpeg')

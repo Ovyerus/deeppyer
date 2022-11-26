@@ -27,7 +27,7 @@ flare_img = Image.open(BytesIO(pkgutil.get_data(__package__, 'flare.png')))
 FlarePosition = namedtuple('FlarePosition', ['x', 'y', 'size'])
 
 
-async def deepfry(img: Image, *, colours: ColourTuple = DefaultColours.red, flares: bool = True) -> Image:
+def deepfry(img: Image, *, colours: ColourTuple = DefaultColours.red, flares: bool = True) -> Image:
     """
     Deepfry a given image.
 
