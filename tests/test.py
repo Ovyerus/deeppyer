@@ -6,7 +6,7 @@ from PIL import Image
 import deeppyer
 
 
-async def main():
+def main():
     print('[tests] Generating gradient image...')
     img = Image.new('RGB', (100, 100))
 
@@ -25,10 +25,10 @@ async def main():
 
     print('[tests] Deepfrying gradient...')
 
-    img2 = await deeppyer.deepfry(img)
+    img2 = deeppyer.deepfry(img)
     img2.save('./tests/gradient-fried.jpg')
 
-    img2 = await deeppyer.deepfry(img, type=deeppyer.DeepfryTypes.BLUE)
+    img2 = deeppyer.deepfry(img, colours=deeppyer.DefaultColours.blue)
     img2.save('./tests/gradient-fried-blue.jpg')
 
     print('[tests] Image successfully deepfried.'
@@ -38,10 +38,10 @@ async def main():
 
     img = Image.open('./tests/human-test.jpg')
 
-    img2 = await deeppyer.deepfry(img)
+    img2 = deeppyer.deepfry(img)
     img2.save('./tests/human-fried.jpg')
 
-    img2 = await deeppyer.deepfry(img, type=deeppyer.DeepfryTypes.BLUE)
+    img2 = deeppyer.deepfry(img, colours=deeppyer.DefaultColours.blue)
     img2.save('./tests/human-fried-blue.jpg')
 
     print('[tests] Human image successfully deepfried.'
@@ -49,5 +49,5 @@ async def main():
 
     print('[tests] All tests successfully completed.')
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+if __name__ == "__main__":
+    main()
